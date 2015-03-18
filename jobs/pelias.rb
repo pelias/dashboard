@@ -1,6 +1,8 @@
 require 'json'
 
-es_endpoint = "http://localhost:9200/pelias"
+# Allow specification of an elasticsearch endpoint vian env var.
+#   Should take the form of "http://{ip|hostname}:{port}/{index}"
+es_endpoint = ENV['ES_ENDPOINT'] || "http://localhost:9200/pelias"
 
 # counts
 %w(
