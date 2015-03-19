@@ -31,12 +31,19 @@ SCHEDULER.every '1m' do
   url = URI.parse "#{es_endpoint}/_stats/store?human"
   response = JSON::parse Net::HTTP.get_response(url).body
   store_size = response['indices']['pelias']['primaries']['store']['size']
-  send_event('store-size', { text: store_size })
+  send_event('es-store-size', { text: store_size })
 end
 
 SCHEDULER.every '1m' do
   url = URI.parse "#{es_endpoint}/_stats/completion?human"
   response = JSON::parse Net::HTTP.get_response(url).body
   completion_size = response['indices']['pelias']['primaries']['completion']['size']
-  send_event('completion-size', { text: completion_size })
+  send_event('es-completion-size', { text: completion_size })
+end
+
+SCHEDULER.every '1m' do
+  url = URI.parse "#{es_endpoint}/_cluster/health"
+  response = JSON::parse Net::HTTP.get_response(url).body
+  cluster_status = response['status']
+  send_event('es-status', { text: status })
 end
