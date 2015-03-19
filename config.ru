@@ -8,6 +8,12 @@ configure do
   set :auth_token,   ENV['AUTH_TOKEN']
   set :history_file, ENV['HISTORY_FILE_PATH'] || '/tmp/history.yml'
 
+  if File.exist?(settings.history_file)
+    set history: YAML.load_file(settings.history_file)
+  else
+    set history: {}
+  end
+
   helpers do
     def protected!
      # Put any authentication code you want in here.
