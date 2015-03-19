@@ -45,5 +45,5 @@ SCHEDULER.every '1m' do
   url = URI.parse "#{es_endpoint}/_cluster/health"
   response = JSON::parse Net::HTTP.get_response(url).body
   cluster_status = response['status']
-  send_event('es-status', { text: status })
+  send_event('es-status', { text: cluster_status })
 end
