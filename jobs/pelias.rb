@@ -27,7 +27,7 @@ es_endpoint = ENV['ES_ENDPOINT'] || "http://localhost:9200/pelias"
 end
 
 # es metrics
-SCHEDULER.every '10s' do
+SCHEDULER.every '1m' do
   url = URI.parse "#{es_endpoint}/_stats?human"
   response = JSON::parse Net::HTTP.get_response(url).body
 
