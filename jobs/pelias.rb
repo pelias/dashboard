@@ -40,10 +40,3 @@ SCHEDULER.every '1m' do
   completion_size = response['indices']['pelias']['primaries']['completion']['size']
   send_event('es-completion-size', { text: completion_size })
 end
-
-SCHEDULER.every '1m' do
-  url = URI.parse "#{es_endpoint}/_cluster/health"
-  response = JSON::parse Net::HTTP.get_response(url).body
-  cluster_status = response['status']
-  send_event('es-status', { text: cluster_status })
-end
