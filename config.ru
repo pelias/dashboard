@@ -4,7 +4,9 @@ configure do
   if ! ENV['AUTH_TOKEN']
     abort 'Must set AUTH_TOKEN env var. Exiting.'
   end
-  set :auth_token, ENV['AUTH_TOKEN']
+
+  set :auth_token,   ENV['AUTH_TOKEN']
+  set :history_file, ENV['HISTORY_FILE_PATH'] || '/tmp/history.yml'
 
   helpers do
     def protected!
