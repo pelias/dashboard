@@ -53,11 +53,7 @@ SCHEDULER.every '10s' do
   indexed = response['indices']['pelias']['primaries']['indexing']['index_total']
 
   # avoid huge spike with first data point
-  if count.last[:indexed] == false
-    rate = 0
-  else
-    rate = (indexed - count.last[:indexed]) / 10
-  end
+  count.last[:indexed] == false ? rate = 0 : rate = (indexed - count.last[:indexed]) / 10
 
   count.shift
   count << { rate: rate, indexed: indexed }
