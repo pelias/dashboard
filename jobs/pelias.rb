@@ -16,14 +16,14 @@ def as_val(s)
     s = (s / 1000000000).round
     "#{s}" + 'B'
   elsif s >= 1000000
-    s = (s / 1000000).round
+    s = (s / 1000000.0).round(1)
     "#{s}" + 'M'
   elsif s >= 10000
-    s = (s / 1000.0).round
+    s = (s / 1000.0).round(1)
     "#{s}" + 'k'
   elsif s >= 1000
     s = (s / 1000.0).round(1)
-    "#{s}" + 'k'
+    "#{s}" + 'K'
   end
 end
 
