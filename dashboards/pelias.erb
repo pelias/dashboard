@@ -1,47 +1,15 @@
 <% content_for :title do %>Pelias Dashboard<% end %>
+
 <div class="gridster">
   <ul>
+    <!-- counts -->
+    <li data-row="1" data-col="1" data-sizex="1" data-sizey="2">
+      <div data-id="types-counts" data-view="List" data-unordered="true" data-title="Counts"></div>
+    </li> 
+
     <!-- build status -->
     <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
       <div data-id="build-status" data-view="Text" data-title="Pelias Build Status"></div>
-    </li>
-    
-    <!-- counts -->
-    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
-      <div data-id="geoname-count" data-view="Number" data-title="Geonames"></div>
-    </li>
-    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
-      <div data-id="admin0-count" data-view="Number" data-title="Admin0"></div>
-    </li>
-    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
-      <div data-id="admin1-count" data-view="Number" data-title="Admin1"></div>
-    </li>
-    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
-      <div data-id="admin2-count" data-view="Number" data-title="Admin2"></div>
-    </li>
-    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
-      <div data-id="local_admin-count" data-view="Number" data-title="Local Admin"></div>
-    </li>
-    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
-      <div data-id="locality-count" data-view="Number" data-title="Locality"></div>
-    </li>
-    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
-      <div data-id="neighborhood-count" data-view="Number" data-title="Neighborhood"></div>
-    </li>
-    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
-      <div data-id="openaddresses-count" data-view="Number" data-title="Openaddresses"></div>
-    </li>
-    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
-      <div data-id="osmnode-count" data-view="Number" data-title="OSM Node"></div>
-    </li>
-    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
-      <div data-id="osmway-count" data-view="Number" data-title="OSM Way"></div>
-    </li>
-    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
-      <div data-id="osmaddress-count" data-view="Number" data-title="OSM Address"></div>
-    </li>
-    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
-      <div data-id="es-doc-count" data-view="Number" data-title="Total Documents"></div>
     </li>
 
     <!-- es metrics -->
