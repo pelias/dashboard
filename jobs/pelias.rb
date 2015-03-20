@@ -46,12 +46,18 @@ end
 
 # index rate
 count = []
-count << { rate: 0, indexed: 0 }
+count << { rate: 0, indexed: false }
 SCHEDULER.every '10s' do
   url = URI.parse "#{es_endpoint}/_stats/indexing?human"
   response = JSON.parse Net::HTTP.get_response(url).body
   indexed = response['indices']['pelias']['primaries']['indexing']['index_total']
-  rate = (indexed - count.last[:indexed]) / 10
+
+  # avoid huge spike with first data point
+  if count.last[:indexed] == false
+    rate = 0
+  else
+    rate = (indexed - count.last[:indexed]) / 10
+  end
 
   count.shift
   count << { rate: rate, indexed: indexed }
