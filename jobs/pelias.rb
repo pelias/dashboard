@@ -52,7 +52,7 @@ SCHEDULER.every '10s' do
   response = JSON.parse Net::HTTP.get_response(url).body
   indexed = response['indices']['pelias']['primaries']['indexing']['index_total']
   rate = (indexed - count.last[:indexed]) / 10
-  
+
   count.shift
   count << { rate: rate, indexed: indexed }
 
