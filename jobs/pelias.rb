@@ -43,3 +43,18 @@ SCHEDULER.every '1m' do
   completion_size = response['indices']['pelias']['primaries']['completion']['size']
   send_event('es-completion-size', text: completion_size)
 end
+
+# index rate
+count = []
+count << { rate: 0, indexed: 0 }
+SCHEDULER.every '10s' do
+  url = URI.parse "#{es_endpoint}/_stats/indexing?human"
+  response = JSON.parse Net::HTTP.get_response(url).body
+  indexed = response['indices']['pelias']['primaries']['indexing']['index_total']
+  rate = (indexed - count.last[:indexed]) / 10
+  
+  count.shift
+  count << { rate: rate, indexed: indexed }
+
+  send_event('es-index-rate', value: count.last[:rate])
+end
