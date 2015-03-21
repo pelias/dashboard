@@ -15,9 +15,6 @@ SCHEDULER.every '1m' do
   index_time = response['indices']['pelias']['primaries']['indexing']['index_time']
   send_event('es-index-time', text: index_time)
 
-  doc_count  = response['indices']['pelias']['primaries']['docs']['count']
-  send_event('es-doc-count', current: doc_count)
-
   completion_size = response['indices']['pelias']['primaries']['completion']['size']
   send_event('es-completion-size', text: completion_size)
 end
