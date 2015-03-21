@@ -7,22 +7,22 @@ es_endpoint = ENV['ES_ENDPOINT'] || 'http://localhost:9200/pelias'
 # convert for the counts list
 def as_val(s)
   s.to_f
-  if s < 1000
+  if s < 1_000
     s
-  elsif s >= 1000000000000
-    s = (s / 1000000000000.0).round(1)
+  elsif s >= 1_000_000_000_000
+    s = (s / 1_000_000_000_000.0).round(1)
     "#{s}" + 'T'
-  elsif s >= 1000000000
-    s = (s / 1000000000.0).round(1)
+  elsif s >= 1_000_000_000
+    s = (s / 1_000_000_000.0).round(1)
     "#{s}" + 'B'
-  elsif s >= 1000000
-    s = (s / 1000000.0).round(1)
+  elsif s >= 1_000_000
+    s = (s / 1_000_000.0).round(1)
     "#{s}" + 'M'
-  elsif s >= 10000
-    s = (s / 1000.0).round(1)
+  elsif s >= 10_000
+    s = (s / 1_000.0).round(1)
     "#{s}" + 'K'
-  elsif s >= 1000
-    s = (s / 1000.0).round(1)
+  elsif s >= 1_000
+    s = (s / 1_000.0).round(1)
     "#{s}" + 'K'
   end
 end
