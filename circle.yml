@@ -4,3 +4,12 @@ machine:
 test:
   override:
     - bundle exec rake
+deployment:
+  staging:
+    branch: master
+    commands:
+      - ./deploy/env.rb staging
+  development:
+    branch: master
+    commands:
+      - ./deploy/env.rb development
