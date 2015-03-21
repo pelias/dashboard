@@ -28,7 +28,7 @@ def as_val(s)
 end
 
 SCHEDULER.every '10s' do
-  types = %w(geoname openaddresses osmnode osmway osmaddress admin0 admin1 admin2 local_admin locality neighborhood)
+  types = %w(geoname admin0 admin1 admin2 local_admin locality neighborhood openaddresses osmnode osmaddress osmway)
   types_counts = Hash.new({ value: 0 })
     
   types.each do |t|
@@ -36,7 +36,6 @@ SCHEDULER.every '10s' do
     response = JSON.parse Net::HTTP.get_response(url).body
     count = as_val(response['count'])
     types_counts[t] = { label: t, value: count }
-    #send_event("#{t}-count", current: count)
   end
   send_event('types-counts', { items: types_counts.values })
 end
