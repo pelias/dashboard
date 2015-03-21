@@ -6,7 +6,7 @@ configure do
   end
 
   set :auth_token,   ENV['AUTH_TOKEN']
-  set :history_file, ENV['HISTORY_FILE_PATH'] || '/tmp/history.yml'
+  set :history_file, ENV['HISTORY_FILE_PATH'] || ENV['HOME'] + '/.history.yml'
 
   if File.exist?(settings.history_file)
     set history: YAML.load_file(settings.history_file)
