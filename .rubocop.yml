@@ -4,3 +4,13 @@ SingleSpaceBeforeFirstArg:
   Enabled: false
 SpaceBeforeFirstArg:
   Enabled: false
+AbcSize:
+  Enabled: false
+CyclomaticComplexity:
+  Enabled: false
+PerceivedComplexity:
+  Enabled: false
+MethodLength:
+  Enabled: false
+Style/FileName:
+  Enabled: false
