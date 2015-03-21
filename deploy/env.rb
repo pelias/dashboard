@@ -12,10 +12,10 @@ require 'aws-sdk'
 #   access_key_id: ENV["#{environment.upcase}_AWS_ACCESS_KEY_ID"],
 #   secret_access_key: ENV["#{environment.upcase}_AWS_SECRET_ACCESS_KEY"]
 # )
-#AWS.config(
-#  access_key_id: ENV['AWS_ACCESS_KEY_ID'],
-#  secret_access_key: ENV['AWS_SECRET_ACCESS_KEY']
-#)
+AWS.config(
+  access_key_id: ENV['AWS_ACCESS_KEY_ID'],
+  secret_access_key: ENV['AWS_SECRET_ACCESS_KEY']
+)
 
 config = {
   staging: {
