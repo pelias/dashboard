@@ -33,6 +33,9 @@ SCHEDULER.every '10s' do
   # avoid huge spike with first data point
   count.last[:indexed] == false ? rate = 0 : rate = (indexed - count.last[:indexed]) / 10
 
+  # don't return a negative indexing rate
+  rate < 0 ? rate = 0 : rate
+
   count.shift
   count << { rate: rate, indexed: indexed }
 
