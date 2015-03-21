@@ -3,8 +3,8 @@
 environment = ARGV[0]
 ARGV[0] = nil
 
-# ENV['BUNDLE_GEMFILE'] ||= File.expand_path('../../Gemfile', __FILE__)
-# load Gem.bin_path('bundler', 'bundle')
+ENV['BUNDLE_GEMFILE'] ||= File.expand_path('../../DeployGemfile', __FILE__)
+load Gem.bin_path('bundler', 'bundle')
 
 require 'aws-sdk'
 
