@@ -20,7 +20,7 @@ def as_val(s)
     "#{s}" + 'M'
   elsif s >= 10000
     s = (s / 1000.0).round(1)
-    "#{s}" + 'k'
+    "#{s}" + 'K'
   elsif s >= 1000
     s = (s / 1000.0).round(1)
     "#{s}" + 'K'
