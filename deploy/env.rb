@@ -12,10 +12,10 @@ require 'aws-sdk'
 #   access_key_id: ENV["#{environment.upcase}_AWS_ACCESS_KEY_ID"],
 #   secret_access_key: ENV["#{environment.upcase}_AWS_SECRET_ACCESS_KEY"]
 # )
-AWS.config(
-  access_key_id: ENV['AWS_ACCESS_KEY_ID'],
-  secret_access_key: ENV['AWS_SECRET_ACCESS_KEY']
-)
+#AWS.config(
+#  access_key_id: ENV['AWS_ACCESS_KEY_ID'],
+#  secret_access_key: ENV['AWS_SECRET_ACCESS_KEY']
+#)
 
 config = {
   staging: {
@@ -33,15 +33,14 @@ config = {
 client = AWS::OpsWorks::Client.new
 
 nodes = client.describe_instances(
-  stack_id: config[environment.to_sym][:stack_id],
   layer_id: config[environment.to_sym][:layer_id]
 )
 instance_array = []
-nodes[:instances].each { |instance| instance_array << instance.values_at(:instance_id) }
+nodes[:instances].map { |val, _| instance_array << val[:instance_id] }
 
 deployment = client.create_deployment(
-  stack_id: config[environment.to_sym][:stack_id],
   app_id: config[environment.to_sym][:app_id],
+  stack_id: config[environment.to_sym][:stack_id],
   instance_ids: instance_array,
   command: {
     name: 'deploy'
