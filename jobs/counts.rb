@@ -6,7 +6,6 @@ es_endpoint = ENV['ES_ENDPOINT'] || 'http://localhost:9200/pelias'
 
 # convert for the counts list
 def as_val(s)
-  s.to_f
   if s < 1_000
     s
   elsif s >= 1_000_000_000_000
