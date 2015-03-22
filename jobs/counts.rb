@@ -1,6 +1,6 @@
 require 'json'
 
-# Allow specification of an elasticsearch endpoint vian env var.
+# Allow specification of an elasticsearch endpoint via env var.
 #   Should take the form of "http://{ip|hostname}:{port}/{index}"
 es_endpoint = ENV['ES_ENDPOINT'] || 'http://localhost:9200/pelias'
 
