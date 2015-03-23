@@ -14,15 +14,25 @@ def as_val(s)
     (s / 1_000_000_000.0).round(1).to_s + 'B'
   elsif s >= 1_000_000
     (s / 1_000_000.0).round(1).to_s + 'M'
-  elsif s >= 10_000
-    (s / 1_000.0).round(1).to_s + 'K'
   elsif s >= 1_000
     (s / 1_000.0).round(1).to_s + 'K'
   end
 end
 
 SCHEDULER.every '30s' do
-  types = %w(geoname admin0 admin1 admin2 local_admin locality neighborhood openaddresses osmnode osmaddress osmway)
+  types = %w(
+    geoname
+    admin0
+    admin1
+    admin2
+    local_admin
+    locality
+    neighborhood
+    openaddresses
+    osmnode
+    osmaddress
+    osmway
+  )
   types_counts = Hash.new(value: 0)
 
   # get total

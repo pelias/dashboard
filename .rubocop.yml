@@ -1,16 +1,6 @@
-LineLength:
-  Max: 250
-SingleSpaceBeforeFirstArg:
-  Enabled: false
-SpaceBeforeFirstArg:
-  Enabled: false
 AbcSize:
   Enabled: false
-CyclomaticComplexity:
-  Enabled: false
-PerceivedComplexity:
-  Enabled: false
+LineLength:
+  Max: 250
 MethodLength:
-  Enabled: false
-Style/FileName:
-  Enabled: false
+  Max: 12
