@@ -45,7 +45,7 @@ SCHEDULER.every '5m' do
   host = URI.split(es_endpoint)[2]
   port = URI.split(es_endpoint)[3]
   port.nil? ? port = 80 : port
-  
+
   version_url = URI.parse "http://#{host}:#{port}/"
   response = JSON.parse Net::HTTP.get_response(version_url).body
   version = response['version']['number']
