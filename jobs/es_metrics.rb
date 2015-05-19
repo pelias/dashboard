@@ -7,7 +7,7 @@ expected_doc_count = ENV['EXPECTED_DOC_COUNT'] || nil
 
 # percent complete
 unless expected_doc_count.nil?
-  SCHEDULER.every '10s' do
+  SCHEDULER.every '1m' do
     url = URI.parse "#{es_endpoint}/_stats/indexing?human"
     response = JSON.parse Net::HTTP.get_response(url).body
     indexed = response['indices']['pelias']['primaries']['indexing']['index_total']
