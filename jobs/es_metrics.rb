@@ -8,9 +8,9 @@ expected_doc_count = ENV['EXPECTED_DOC_COUNT'] || nil
 # percent complete
 unless expected_doc_count.nil?
   SCHEDULER.every '1m' do
-    url = URI.parse "#{es_endpoint}/_stats/indexing?human"
+    url = URI.parse "#{es_endpoint}/_stats/docs"
     response = JSON.parse Net::HTTP.get_response(url).body
-    indexed = response['indices']['pelias']['primaries']['indexing']['index_total']
+    indexed = response['indices']['pelias']['primaries']['docs']['count']
 
     percent_complete = ((indexed.to_f / expected_doc_count.to_f) * 100).to_i
     percent_complete > 100 ? percent_complete = 100 : percent_complete
