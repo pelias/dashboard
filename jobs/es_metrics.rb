@@ -27,10 +27,6 @@ SCHEDULER.every '1m' do
   store_size = response['indices']['pelias']['primaries']['store']['size']
   send_event('es-store-size', text: store_size)
 
-  index_time = response['indices']['pelias']['primaries']['indexing']['index_time_in_millis']
-  index_time_hours = (index_time / 3_600_000.0).round(1).to_s + 'h'
-  send_event('es-index-time', text: index_time_hours)
-
   completion_size = response['indices']['pelias']['primaries']['completion']['size']
   send_event('es-completion-size', text: completion_size)
 end
