@@ -8,5 +8,6 @@ deployment:
   staging_and_dev:
     branch: master
     commands:
+      - ./deploy/env.rb build
       - ./deploy/env.rb staging
       - ./deploy/env.rb development
