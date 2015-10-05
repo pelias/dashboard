@@ -9,5 +9,5 @@ deployment:
     branch: master
     commands:
       - ./deploy/env.rb build
-      - ./deploy/env.rb staging
+      - ./deploy/env.rb dev_full
       - ./deploy/env.rb development
