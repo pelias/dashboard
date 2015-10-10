@@ -18,20 +18,15 @@ AWS.config(
 )
 
 config = {
-  build: {
+  prod_build: {
     stack_id: '503b985f-d063-4bd6-a5ce-07c39376fc46',
     layer_id: 'dd207474-17c8-4309-8cf6-cbb07f457637',
     app_id: '38398e77-3795-48ee-bfe7-f4f0c271ee76'
   },
-  dev_full: {
+  dev: {
     stack_id: 'df8fcfa4-b4de-405c-b27b-b4d33508998d',
     layer_id: 'f15f5d55-4fe0-4ae0-80df-e34321b87f54',
     app_id: '020408de-90ab-4671-80a1-89c3549143b0'
-  },
-  development: {
-    stack_id: '521dad25-f6b8-4f1f-97bc-7684b96c744b',
-    layer_id: 'cf95d61a-ea84-4272-a072-982157d3ba60',
-    app_id: 'a648211e-7b74-4db3-b49e-7b36587436c2'
   }
 }
 
