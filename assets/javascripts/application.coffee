@@ -26,10 +26,10 @@ Dashing.on 'ready', ->
 
   Dashing.Widget::accessor 'updatedAtMessage', ->
     if updatedAt = @get('updatedAt')
-      timestamp = new Date(updatedAt * 1000)
-      day       = timestamp.getDay()
-      month     = timestamp.getMonth()
-      year      = timestamp.getFullYear()
-      hours     = timestamp.getHours()
-      minutes   = ("0" + timestamp.getMinutes()).slice(-2)
-      "Last update: #{day}/#{month}/#{year} @ #{hours}:#{minutes}"
+      time    = new Date(updatedAt * 1000)
+      year    = time.getFullYear()
+      month   = (time.getMonth() + 1)
+      day     = time.getDate()
+      hour    = time.getHours()
+      minute  = ("0" + time.getMinutes()).slice(-2)
+      "Last update: #{day}/#{month}/#{year} #{hour}:#{minute}"
