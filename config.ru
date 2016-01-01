@@ -1,9 +1,7 @@
 require 'dashing'
 
 configure do
-  if ! ENV['AUTH_TOKEN']
-    abort 'Must set AUTH_TOKEN env var. Exiting.'
-  end
+  abort 'Must set AUTH_TOKEN env var. Exiting.' unless ENV['AUTH_TOKEN']
 
   set :auth_token,   ENV['AUTH_TOKEN']
   set :history_file, ENV['HISTORY_FILE_PATH'] || ENV['HOME'] + '/.history.yml'
@@ -16,8 +14,8 @@ configure do
 
   helpers do
     def protected!
-     # Put any authentication code you want in here.
-     # This method is run before accessing any resource.
+      # Put any authentication code you want in here.
+      # This method is run before accessing any resource.
     end
   end
 end

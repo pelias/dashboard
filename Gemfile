@@ -4,5 +4,5 @@ gem 'dashing'
 
 group :test, :development do
   gem 'rake'
-  gem 'rubocop', '= 0.29.1'
+  gem 'rubocop', '= 0.35.1'
 end
