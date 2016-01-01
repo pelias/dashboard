@@ -1,3 +1,10 @@
+# Allow specification of an elasticsearch endpoint via env var.
+#   Should take the form of "http://{ip|hostname}:{port}/{index}"
+@es_endpoint = ENV['ES_ENDPOINT'] || 'http://localhost:9200/pelias'
+
+# expected doc count
+@expected_doc_count = ENV['EXPECTED_DOC_COUNT'] || nil
+
 # convert for the counts list
 def as_val(s)
   if s < 1_000
