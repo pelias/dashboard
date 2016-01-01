@@ -19,7 +19,7 @@ end
 #   Should take the form of "http://{ip|hostname}:{port}/{index}"
 es_endpoint = ENV['ES_ENDPOINT'] || 'http://localhost:9200/pelias'
 expected_doc_count = ENV['EXPECTED_DOC_COUNT'] || nil
-expected_doc_count_pretty = as_val(expected_doc_count)
+expected_doc_count_pretty = as_val(expected_doc_count.to_i)
 
 # percent complete
 unless expected_doc_count.nil?
