@@ -5,10 +5,11 @@ require_relative 'methods.rb'
 #   Should take the form of "http://{ip|hostname}:{port}/{index}"
 es_endpoint = ENV['ES_ENDPOINT'] || 'http://localhost:9200/pelias'
 expected_doc_count = ENV['EXPECTED_DOC_COUNT'] || nil
-expected_doc_count_pretty = as_val(expected_doc_count.to_i)
 
 # percent complete
 unless expected_doc_count.nil?
+  expected_doc_count_pretty = as_val(expected_doc_count.to_i)
+
   SCHEDULER.every '1m' do
     url = URI.parse "#{es_endpoint}/_stats/docs"
     response = JSON.parse Net::HTTP.get_response(url).body
