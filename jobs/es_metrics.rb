@@ -53,3 +53,16 @@ SCHEDULER.every '10s' do
 
   send_event('es-index-rate', value: count.last[:rate])
 end
+
+# version
+SCHEDULER.every '5m' do
+  host = URI.split(es_endpoint)[2]
+  port = URI.split(es_endpoint)[3]
+  port.nil? ? port = 80 : port
+
+  version_url = URI.parse "http://#{host}:#{port}/"
+  response = JSON.parse Net::HTTP.get_response(version_url).body
+  version = response['version']['number']
+
+  send_event('es-version', text: version)
+end
