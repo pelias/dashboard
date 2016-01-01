@@ -1,9 +1,25 @@
 require 'json'
 
+# convert for the counts list
+def as_val(s)
+  if s < 1_000
+    s
+  elsif s >= 1_000_000_000_000
+    (s / 1_000_000_000_000.0).round(1).to_s + 'T'
+  elsif s >= 1_000_000_000
+    (s / 1_000_000_000.0).round(1).to_s + 'B'
+  elsif s >= 1_000_000
+    (s / 1_000_000.0).round(1).to_s + 'M'
+  elsif s >= 1_000
+    (s / 1_000.0).round(1).to_s + 'K'
+  end
+end
+
 # Allow specification of an elasticsearch endpoint vian env var.
 #   Should take the form of "http://{ip|hostname}:{port}/{index}"
 es_endpoint = ENV['ES_ENDPOINT'] || 'http://localhost:9200/pelias'
 expected_doc_count = ENV['EXPECTED_DOC_COUNT'] || nil
+expected_doc_count_pretty = as_val(expected_doc_count)
 
 # percent complete
 unless expected_doc_count.nil?
@@ -15,7 +31,7 @@ unless expected_doc_count.nil?
     percent_complete = ((indexed.to_f / expected_doc_count.to_f) * 100).to_i
     percent_complete > 100 ? percent_complete = 100 : percent_complete
 
-    send_event('percent-complete', text: "#{percent_complete}% (#{expected_doc_count} expected docs)")
+    send_event('percent-complete', text: "#{percent_complete}% (#{expected_doc_count_pretty} expected docs)")
   end
 end
 
