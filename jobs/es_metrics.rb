@@ -13,7 +13,7 @@ unless @expected_doc_count.nil?
     percent_complete = ((indexed.to_f / @expected_doc_count.to_f) * 100).to_i
     percent_complete > 100 ? percent_complete = 100 : percent_complete
 
-    send_event('percent-complete', text: "#{percent_complete}% (#{expected_doc_count_pretty} estimated docs)")
+    send_event('percent-complete', text: "#{percent_complete}% (~#{expected_doc_count_pretty} expected docs)")
   end
 end
 
