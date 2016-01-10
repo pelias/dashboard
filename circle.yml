@@ -12,4 +12,4 @@ deployment:
   dev:
     branch: master
     commands:
-      - ./deploy/env.rb prod_build
+      - ./deploy/env.rb dev
