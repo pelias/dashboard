@@ -3,17 +3,18 @@ require_relative 'include.rb'
 
 SCHEDULER.every '30s' do
   types = %w(
-    geoname
-    admin0
-    admin1
-    admin2
-    local_admin
+    address
+    venue
+    country
+    county
+    dependency
+    disputed
+    localadmin
     locality
-    neighborhood
-    openaddresses
-    osmnode
-    osmaddress
-    osmway
+    macrocounty
+    macroregion
+    neighbourhood
+    region
   )
   types_counts = Hash.new(value: 0)
 
