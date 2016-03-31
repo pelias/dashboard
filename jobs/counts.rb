@@ -3,16 +3,6 @@ require_relative 'include.rb'
 
 SCHEDULER.every '30s' do
   types = %w(
-    geoname
-    admin0
-    admin1
-    admin2
-    local_admin
-    neighborhood
-    openaddresses
-    osmnode
-    osmaddress
-    osmway
     address
     venue
     country
