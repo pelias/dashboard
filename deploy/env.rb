@@ -27,6 +27,11 @@ config = {
     stack_id: 'df8fcfa4-b4de-405c-b27b-b4d33508998d',
     layer_id: 'f15f5d55-4fe0-4ae0-80df-e34321b87f54',
     app_id: '020408de-90ab-4671-80a1-89c3549143b0'
+  },
+  dev2: {
+    stack_id: '669edc07-0088-4a39-b359-d3209de1d74c',
+    layer_id: 'bd7a54e9-ede0-4e31-bb43-485bb6949a02',
+    app_id: '3bb55c8b-fd79-41d4-be97-0091201813fe'
   }
 }
 

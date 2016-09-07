@@ -10,3 +10,4 @@ deployment:
     commands:
       - ./deploy/env.rb prod_build
       - ./deploy/env.rb dev
+      - ./deploy/env.rb dev2
