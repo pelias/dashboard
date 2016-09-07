@@ -5,6 +5,7 @@ SCHEDULER.every '30s' do
   types = %w(
     address
     venue
+    street
     country
     county
     dependency
