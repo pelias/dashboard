@@ -22,7 +22,7 @@ SCHEDULER.every '30s' do
   # get total
   total_url = URI.parse "#{@es_endpoint}/_stats/docs"
   total_response = JSON.parse Net::HTTP.get_response(total_url).body
-  total_count = as_val(total_response['indices']['pelias']['primaries']['docs']['count'])
+  total_count = as_val(total_response['indices'][@es_index]['primaries']['docs']['count'])
   types_counts['total'] = { label: 'total', value: total_count }
 
   # get types
