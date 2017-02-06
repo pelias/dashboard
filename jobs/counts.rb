@@ -16,6 +16,7 @@ SCHEDULER.every '30s' do
     macroregion
     neighbourhood
     region
+    postalcode
   )
   types_counts = Hash.new(value: 0)
 
