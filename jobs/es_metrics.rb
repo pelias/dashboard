@@ -6,7 +6,7 @@ unless @expected_doc_count.nil?
   expected_doc_count_pretty = as_val(@expected_doc_count.to_i)
 
   SCHEDULER.every '1m' do
-    url = URI.parse "#{@es_endpoint}/_stats/docs"
+    url = URI.parse "#{@es_endpoint}#{@es_index}/_stats/docs"
     response = JSON.parse Net::HTTP.get_response(url).body
     indexed = response['indices'][@es_index]['primaries']['docs']['count']
 
@@ -19,7 +19,7 @@ end
 
 # es metrics
 SCHEDULER.every '1m' do
-  url = URI.parse "#{@es_endpoint}/_stats?human"
+  url = URI.parse "#{@es_endpoint}#{@es_index}/_stats?human"
   response = JSON.parse Net::HTTP.get_response(url).body
 
   store_size = response['indices'][@es_index]['primaries']['store']['size']
@@ -33,7 +33,7 @@ end
 count = []
 count << { rate: 0, indexed: false }
 SCHEDULER.every '10s' do
-  url = URI.parse "#{@es_endpoint}/_stats/indexing?human"
+  url = URI.parse "#{@es_endpoint}#{@es_index}/_stats/indexing?human"
   response = JSON.parse Net::HTTP.get_response(url).body
   indexed = response['indices'][@es_index]['primaries']['indexing']['index_total']
 

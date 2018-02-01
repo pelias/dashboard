@@ -21,14 +21,14 @@ SCHEDULER.every '30s' do
   types_counts = Hash.new(value: 0)
 
   # get total
-  total_url = URI.parse "#{@es_endpoint}/_stats/docs"
+  total_url = URI.parse "#{@es_endpoint}#{@es_index}/_stats/docs"
   total_response = JSON.parse Net::HTTP.get_response(total_url).body
   total_count = as_val(total_response['indices'][@es_index]['primaries']['docs']['count'])
   types_counts['total'] = { label: 'total', value: total_count }
 
   # get types
   types.each do |t|
-    url = URI.parse "#{@es_endpoint}/#{t}/_count"
+    url = URI.parse "#{@es_endpoint}#{@es_index}/#{t}/_count"
     response = JSON.parse Net::HTTP.get_response(url).body
     count = as_val(response['count'])
     types_counts[t] = { label: t, value: count }
