@@ -3,7 +3,6 @@
 # determine if a given index name is actually an alias
 # and if so, return the true index name
 def resolve_alias(index_name)
-  puts "checking alias"
   alias_response = Net::HTTP.get_response(URI.parse("#{@es_endpoint}_alias/#{index_name}"))
   puts alias_response.body
   puts alias_response.code
@@ -11,10 +10,11 @@ def resolve_alias(index_name)
   if alias_response.code != "200"
     index_name
   else
-    puts "#{index_name} is an alias"
     parsed_response = JSON.parse(alias_response.body)
     puts parsed_response
     actual_index = parsed_response.keys[0]
+    puts "#{index_name} is an alias to #{actual_index}"
+    actual_index
   end
 end
 
