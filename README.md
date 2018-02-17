@@ -12,3 +12,7 @@ AUTH_TOKEN=something ES_ENDPOINT=http://your_es_hostname_or_ip:9200/pelias dashi
 ```
 
 * navigate to http://localhost:3030 in your browser
+
+Docker
+------
+There is an included Dockerfile that can be used to run the dashboard
