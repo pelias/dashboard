@@ -4,19 +4,17 @@ RUN apt-get update && apt-get install -y \
   unzip \
   nodejs
 
-RUN useradd -m -d /opt/pelias-dashboard pelias && \
-  chown -R pelias:pelias /opt/pelias-dashboard
+RUN useradd -m -d /opt/pelias pelias && \
+  chown -R pelias:pelias /opt/pelias
 
 USER pelias
 
-RUN cd /tmp && \
-  curl -L https://github.com/pelias/pelias-dashboard/archive/master.zip > master.zip && \
-  unzip master.zip -d /tmp && \
-  rm -f /tmp/master.zip && \
-  mv /tmp/pelias-dashboard-master/* /opt/pelias-dashboard
+ENV WORKDIR /opt/pelias/dashboard
+WORKDIR $WORKDIR
+
+ADD . ${WORKDIR}
 
 RUN gem install bundler
 
-WORKDIR /opt/pelias-dashboard
 RUN bundle install
 CMD dashing start

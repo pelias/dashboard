@@ -1,7 +1,28 @@
+@es_endpoint = ENV['ES_ENDPOINT'] || 'http://localhost:9200/'
+
+# determine if a given index name is actually an alias
+# and if so, return the true index name
+def resolve_alias(index_name)
+  alias_response = Net::HTTP.get_response(URI.parse("#{@es_endpoint}_alias/#{index_name}"))
+  puts alias_response.body
+  puts alias_response.code
+
+  if alias_response.code != "200"
+    index_name
+  else
+    parsed_response = JSON.parse(alias_response.body)
+    puts parsed_response
+    actual_index = parsed_response.keys[0]
+    puts "#{index_name} is an alias to #{actual_index}"
+    actual_index
+  end
+end
+
 # Allow specification of an elasticsearch endpoint via env var.
-#   Should take the form of "http://{ip|hostname}:{port}/{index}"
-@es_endpoint = ENV['ES_ENDPOINT'] || 'http://localhost:9200/pelias'
-@es_index = URI.split(@es_endpoint)[5].split('/').last
+#   Should take the form of "http://{ip|hostname}:{port}/"
+es_index = ENV['ES_INDEX'] || 'pelias'
+
+@es_index = resolve_alias(es_index)
 
 # expected doc count
 @expected_doc_count = ENV['EXPECTED_DOC_COUNT'] || nil
