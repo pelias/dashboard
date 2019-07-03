@@ -2,7 +2,11 @@ require 'json'
 require_relative 'include.rb'
 
 SCHEDULER.every '30s' do
-  types = %w(
+
+  # make a list of common layers
+  # total is also first to ensure it shows up first
+  default_layers = %w(
+    total
     address
     venue
     street
@@ -18,20 +22,43 @@ SCHEDULER.every '30s' do
     region
     postalcode
   )
-  types_counts = Hash.new(value: 0)
+  layer_counts = Hash.new(value: 0)
 
-  # get total
-  total_url = URI.parse "#{@es_endpoint}#{@es_index}/_stats/docs"
-  total_response = JSON.parse Net::HTTP.get_response(total_url).body
-  total_count = as_val(total_response['indices'][@es_index]['primaries']['docs']['count'])
-  types_counts['total'] = { label: 'total', value: total_count }
-
-  # get types
-  types.each do |t|
-    url = URI.parse "#{@es_endpoint}#{@es_index}/#{t}/_count"
-    response = JSON.parse Net::HTTP.get_response(url).body
-    count = as_val(response['count'])
-    types_counts[t] = { label: t, value: count }
+  # initialize type counts to 0 for common layers
+  default_layers.each do |type|
+    layer_counts[type] = { label: type, value: 0 }
   end
-  send_event('types-counts', items: types_counts.values)
+
+  # aggregation query to get all layer counts
+  query = {
+    aggs: {
+      layers: {
+        terms: {
+          field: 'layer',
+          size: 1000
+        }
+      }
+    },
+    size: 0
+  }
+
+  # get layer counts by aggregation
+  url = URI.parse "#{@es_endpoint}#{@es_index}/_search?request_cache=true"
+
+  response = Net::HTTP.post(url, query.to_json)
+
+  response_body = JSON.parse response.body
+
+  # set total count
+  layer_counts['total'] = { label: 'total', value: as_val(response_body['hits']['total']) }
+
+  layer_count_results = response_body['aggregations']['layers']['buckets']
+
+  layer_count_results.each do |result|
+    layer = result['key']
+    count = as_val(result['doc_count'])
+    layer_counts[layer] = { label: layer, value: count }
+  end
+
+  send_event('types-counts', items: layer_counts.values)
 end
