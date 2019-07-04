@@ -1,4 +1,4 @@
-require 'dashing'
+require 'smashing'
 
 configure do
   abort 'Must set AUTH_TOKEN env var. Exiting.' unless ENV['AUTH_TOKEN']

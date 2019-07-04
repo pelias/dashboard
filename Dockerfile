@@ -1,4 +1,4 @@
-FROM ruby:2.4
+FROM ruby:2.6
 
 RUN apt-get update && apt-get install -y \
   unzip \
@@ -17,4 +17,4 @@ ADD . ${WORKDIR}
 RUN gem install bundler
 
 RUN bundle install
-CMD dashing start
+CMD smashing start
