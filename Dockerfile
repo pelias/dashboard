@@ -17,4 +17,4 @@ ADD . ${WORKDIR}
 RUN gem install bundler
 
 RUN bundle install
-CMD dashing start
+CMD smashing start
