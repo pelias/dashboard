@@ -23,13 +23,3 @@ Dashing.on 'ready', ->
       draggable:
         stop: Dashing.showGridsterInstructions
         start: -> Dashing.currentWidgetPositions = Dashing.getWidgetPositions()
-
-  Dashing.Widget::accessor 'updatedAtMessage', ->
-    if updatedAt = @get('updatedAt')
-      time    = new Date(updatedAt * 1000)
-      year    = time.getFullYear()
-      month   = (time.getMonth() + 1)
-      day     = time.getDate()
-      hour    = time.getHours()
-      minute  = ("0" + time.getMinutes()).slice(-2)
-      "Last update: #{day}/#{month}/#{year} #{hour}:#{minute}"
