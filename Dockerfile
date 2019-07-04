@@ -12,9 +12,12 @@ USER pelias
 ENV WORKDIR /opt/pelias/dashboard
 WORKDIR $WORKDIR
 
+# Gems:
+COPY Gemfile Gemfile
+COPY Gemfile.lock Gemfile.lock
+RUN gem install bundler
+RUN bundle install
+
 ADD . ${WORKDIR}
 
-RUN gem install bundler
-
-RUN bundle install
-CMD smashing start
+CMD bundle exec smashing start
