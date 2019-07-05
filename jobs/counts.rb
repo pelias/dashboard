@@ -45,7 +45,7 @@ SCHEDULER.every '30s' do
   # get layer counts by aggregation
   url = URI.parse "#{@es_endpoint}#{@es_index}/_search?request_cache=true"
 
-  response = Net::HTTP.post(url, query.to_json)
+  response = Net::HTTP.post(url, query.to_json, { "Content-Type" => "application/json" })
 
   response_body = JSON.parse response.body
 
