@@ -29,6 +29,15 @@ SCHEDULER.every '30s' do
     layer_counts[type] = { label: type, value: 0 }
   end
 
+  # get total count
+  total_url = URI.parse "#{@es_endpoint}#{@es_index}/_count"
+
+  total_response = Net::HTTP.post(total_url, '', { "Content-Type" => "application/json" })
+
+  total_response_body = JSON.parse total_response.body
+
+  layer_counts['total'] = { label: 'total', value: as_val(total_response_body['count']) }
+
   # aggregation query to get all layer counts
   query = {
     aggs: {
@@ -48,9 +57,6 @@ SCHEDULER.every '30s' do
   response = Net::HTTP.post(url, query.to_json, { "Content-Type" => "application/json" })
 
   response_body = JSON.parse response.body
-
-  # set total count
-  layer_counts['total'] = { label: 'total', value: as_val(response_body['hits']['total']) }
 
   layer_count_results = response_body['aggregations']['layers']['buckets']
 
