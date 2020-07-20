@@ -1,9 +1,6 @@
 require 'dashing'
 
 configure do
-  abort 'Must set AUTH_TOKEN env var. Exiting.' unless ENV['AUTH_TOKEN']
-
-  set :auth_token,   ENV['AUTH_TOKEN']
   set :history_file, ENV['HISTORY_FILE_PATH'] || ENV['HOME'] + '/.history.yml'
 
   if File.exist?(settings.history_file)

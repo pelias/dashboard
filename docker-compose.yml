@@ -9,5 +9,4 @@ services:
     hostname: pelias-dashboard
     container_name: pelias-dashboard
     environment:
-      AUTH_TOKEN: something
       ES_ENDPOINT: http://127.0.0.1:9200/pelias

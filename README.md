@@ -8,7 +8,7 @@ Basics
 
 ```
 bundle install
-AUTH_TOKEN=something ES_ENDPOINT=http://your_es_hostname_or_ip:9200/pelias dashing start
+ES_ENDPOINT=http://your_es_hostname_or_ip:9200/pelias dashing start
 ```
 
 * navigate to http://localhost:3030 in your browser
