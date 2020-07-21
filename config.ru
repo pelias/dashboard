@@ -1,14 +1,6 @@
 require 'dashing'
 
 configure do
-  set :history_file, ENV['HISTORY_FILE_PATH'] || ENV['HOME'] + '/.history.yml'
-
-  if File.exist?(settings.history_file)
-    set history: YAML.load_file(settings.history_file)
-  else
-    set history: {}
-  end
-
   helpers do
     def protected!
       # Put any authentication code you want in here.
