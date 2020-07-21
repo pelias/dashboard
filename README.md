@@ -22,17 +22,28 @@ Pelias is a search engine for places worldwide, powered by open data. It turns a
 We think open data, open source, and open strategy win over proprietary solutions at any part of the stack and we want to ensure the services we offer are in line with that vision. We believe that an open geocoder improves over the long-term only if the community can incorporate truly representative local knowledge.
 </details>
 
-Basics
-------
-* if you're running Pelias and want to get some information at a glance...
+# Pelias Dashboard
+
+This is a small, read-only dashboard that provides a convenient display of some basic information about Pelias based on data from Elasticsearch.
+
+It's not a mission critical part of Pelias by any means, but it can be nice to look at.
+
+This dashboard is built using the [Smashing](https://smashing.github.io/) framework.
+
+## Basics
 
 ```
 bundle install
-ES_ENDPOINT=http://your_es_hostname_or_ip:9200/pelias dashing start
+ES_ENDPOINT=http://your_es_hostname_or_ip:9200/pelias smashing start
 ```
 
 * navigate to http://localhost:3030 in your browser
 
 Docker
 ------
-There is an included Dockerfile that can be used to run the dashboard
+There is an included Dockerfile that can be used to run the dashboard:
+
+```
+docker build . -t pelias/dashboard
+docker run -e ES_ENDPOINT=http://your_es_hostname_or_ip:9200/pelias pelias/dashboard
+```
