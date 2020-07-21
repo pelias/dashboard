@@ -28,6 +28,8 @@ This is a small, read-only dashboard that provides a convenient display of some 
 
 It's not a mission critical part of Pelias by any means, but it can be nice to look at.
 
+![Example output from the Pelias Dashboard](./dashboard_example.png)
+
 This dashboard is built using the [Smashing](https://smashing.github.io/) framework.
 
 ## Basics
