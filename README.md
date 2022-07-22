@@ -47,11 +47,11 @@ There is an included Dockerfile that can be used to run the dashboard:
 
 ```
 docker build . -t pelias/dashboard
-docker run -it -e ES_ENDPOINT=http://your_es_hostname_or_ip:9200/pelias -p 3030:3030 pelias/dashboard
+docker run -it -e ES_ENDPOINT=http://your_es_hostname_or_ip:9200/pelias -p 3030:3030 -d --restart always --name pelias_dashboard pelias/dashboard
 ```
 
 If running Pelias via [pelias/docker](https://github.com/pelias/docker/), you will want to ensure to set the correct network:
 
 ```
-docker run -it --network pelias_default -e ES_ENDPOINT=http://elasticsearch:9200/ -p 3030:3030 pelias/dashboard
+docker run -it --network pelias_default -e ES_ENDPOINT=http://elasticsearch:9200/ -p 3030:3030 -d --restart always --name pelias_dashboard pelias/dashboard
 ```
