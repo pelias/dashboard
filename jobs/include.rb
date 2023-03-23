@@ -1,3 +1,6 @@
+
+# Allow specification of an elasticsearch endpoint via env var
+#   Should take the form of "http://{ip|hostname}:{port}/"
 @es_endpoint = ENV['ES_ENDPOINT'] || 'http://localhost:9200/'
 
 # determine if a given index name is actually an alias
@@ -18,8 +21,7 @@ def resolve_alias(index_name)
   end
 end
 
-# Allow specification of an elasticsearch endpoint via env var.
-#   Should take the form of "http://{ip|hostname}:{port}/"
+# Allow specification of an elasticsearch index via env var
 es_index = ENV['ES_INDEX'] || 'pelias'
 
 @es_index = resolve_alias(es_index)
