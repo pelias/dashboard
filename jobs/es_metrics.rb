@@ -7,7 +7,7 @@ unless @expected_doc_count.nil?
 
   SCHEDULER.every '1m' do
     url = URI.parse "#{@es_endpoint}#{@es_index}/_stats/docs"
-    response = JSON.parse Net::HTTP.get_response(url).body
+    response = JSON.parse @es_client.get(url).body
     indexed = response['indices'][@es_index]['primaries']['docs']['count']
 
     percent_complete = ((indexed.to_f / @expected_doc_count.to_f) * 100).to_i
@@ -20,7 +20,7 @@ end
 # es metrics
 SCHEDULER.every '1m' do
   url = URI.parse "#{@es_endpoint}#{@es_index}/_stats?human"
-  response = JSON.parse Net::HTTP.get_response(url).body
+  response = JSON.parse @es_client.get(url).body
 
   store_size = response['indices'][@es_index]['primaries']['store']['size']
   send_event('es-store-size', text: store_size)
@@ -34,7 +34,7 @@ count = []
 count << { rate: 0, indexed: false }
 SCHEDULER.every '10s' do
   url = URI.parse "#{@es_endpoint}#{@es_index}/_stats/indexing?human"
-  response = JSON.parse Net::HTTP.get_response(url).body
+  response = JSON.parse @es_client.get(url).body
   indexed = response['indices'][@es_index]['primaries']['indexing']['index_total']
 
   # avoid huge spike with first data point
@@ -56,7 +56,7 @@ SCHEDULER.every '5m' do
   port.nil? ? port = 80 : port
 
   version_url = URI.parse "http://#{host}:#{port}/"
-  response = JSON.parse Net::HTTP.get_response(version_url).body
+  response = JSON.parse @es_client.get(version_url).body
   version = response['version']['number']
 
   send_event('es-version', text: version)

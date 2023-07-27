@@ -1,3 +1,4 @@
+require_relative 'elasticsearch_client.rb'
 
 # Allow specification of an elasticsearch endpoint via env var
 #   Should take the form of "http://{ip|hostname}:{port}/"
@@ -6,11 +7,11 @@
 # determine if a given index name is actually an alias
 # and if so, return the true index name
 def resolve_alias(index_name)
-  alias_response = Net::HTTP.get_response(URI.parse("#{@es_endpoint}_alias/#{index_name}"))
+  alias_response = @es_client.get "_alias/#{index_name}"
   puts alias_response.body
-  puts alias_response.code
+  puts alias_response.status
 
-  if alias_response.code != "200"
+  if alias_response.status != "200"
     index_name
   else
     parsed_response = JSON.parse(alias_response.body)

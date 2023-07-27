@@ -39,6 +39,15 @@ bundle install
 ES_ENDPOINT=http://your_es_hostname_or_ip:9200/ ES_INDEX=pelias smashing start
 ```
 
+Add Elasticsearch username and password as needed
+```
+ES_ENDPOINT=http://your_es_hostname_or_ip:9200/ ES_USERNAME=elastic ES_PASSWORD=password ES_INDEX=pelias smashing start
+```
+
+Add Username and password to enable Basic Auth
+```
+ES_ENDPOINT=http://your_es_hostname_or_ip:9200/ USERNAME=username PASSWORD=password ES_INDEX=pelias smashing start
+```
 * navigate to http://localhost:3030 in your browser
 
 Docker
